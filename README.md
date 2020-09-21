@@ -1,7 +1,7 @@
-## Telesoftas React App Starter
+## Safehouse Admin Panel
 
 - [x] React
-- [ ] Redux
+- [x] Redux
 - [ ] ReduxDevTools
 - [ ] Redux Forms
 - [ ] Apollo
@@ -9,10 +9,10 @@
 - [ ] Styled Components
 - [x] Storybook
 - [ ] Storybook Storysource
-- [ ] Storybook Knobs
+- [x] Storybook Knobs
 - [ ] Jest
 - [ ] PostCSS
-- [ ] gitlab-ci config to build dist package
+- [x] gitlab-ci config to build dist package
 
 ## Project setup
 
