@@ -6,7 +6,7 @@ import { Icon, Text } from 'components'
 import { ThemeProps, theme } from 'theme'
 
 export interface ListProp {
-  id: number
+  id: number | string
   name: string
 }
 

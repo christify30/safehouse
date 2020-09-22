@@ -27,7 +27,7 @@ export const Login = (props: LoginProps) => {
   }, [props.user.error])
 
   if (props.user.isAuthenticated) {
-    return <Redirect to="/users" />
+    return <Redirect to="/property-listings" />
   }
 
   const onChange = (e: React.ChangeEvent<HTMLInputElement>): void => {

@@ -36,10 +36,6 @@ export const makeRequest = (
   const defer = new Promise(function(resolve, reject) {
     fetch(request)
       .then(response => {
-        if (response.status === 401) {
-          history.push('/logout')
-          return
-        }
         if (response.ok) {
           return resolve(response.json())
         } else {

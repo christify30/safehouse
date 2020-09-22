@@ -35,9 +35,7 @@ const EditUser = (props: any) => {
 
   useEffect(() => {
     if (!user) {
-      fetchPositions()
-      fetchDepartments()
-      fetchUsers()
+      // fetchUsers()
     }
   }, [])
 

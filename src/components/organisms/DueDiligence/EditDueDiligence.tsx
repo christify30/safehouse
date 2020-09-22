@@ -18,13 +18,13 @@ const EditDueDiligence = (props: any) => {
   const {
     error,
     updateDueDiligence,
-    department,
+    dueDiligence,
     loading,
     fetchDueDiligences,
   } = props
 
   useEffect(() => {
-    if (!department) {
+    if (!dueDiligence) {
       fetchDueDiligences()
     }
   }, [])
@@ -32,21 +32,21 @@ const EditDueDiligence = (props: any) => {
   return (
     <section css={styles.container}>
       {loading && <Loader />}
-      {department && (
+      {dueDiligence && (
         <section>
           <Header
-            title={department.name}
+            title={dueDiligence.name}
             buttonType="secondary"
-            buttonUrl={`/due-diligence/delete/${department.id}`}
+            buttonUrl={`/due-diligence/delete/${dueDiligence._id}`}
             buttonText="Delete department"
           />
           <Formik
             initialValues={{
-              name: department.name,
+              name: dueDiligence.name,
             }}
             onSubmit={values => {
               const payload = {
-                id: department.id,
+                id: dueDiligence.id,
                 data: values,
               }
               updateDueDiligence(payload)

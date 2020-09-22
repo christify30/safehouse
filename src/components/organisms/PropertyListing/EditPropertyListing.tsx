@@ -12,6 +12,7 @@ import {
   Button,
   Header,
   Loader,
+  Select,
 } from 'components'
 
 const EditPropertyListing = (props: any) => {
@@ -20,12 +21,12 @@ const EditPropertyListing = (props: any) => {
     updatepropertyListing,
     propertyListing,
     loading,
-    fetchpropertyListings,
+    fetchPropertyListings,
   } = props
 
   useEffect(() => {
     if (!propertyListing) {
-      fetchpropertyListings()
+      fetchPropertyListings()
     }
   }, [])
 
@@ -38,12 +39,15 @@ const EditPropertyListing = (props: any) => {
             title={propertyListing.name}
             buttonType="secondary"
             buttonIcon="delete"
-            buttonUrl={`/property-listings/delete/${propertyListing.id}`}
+            buttonUrl={`/property-listings/delete/${propertyListing._id}`}
             buttonText="Delete Property"
           />
           <Formik
             initialValues={{
               name: propertyListing.name,
+              location: propertyListing.location,
+              price: propertyListing.price,
+              category: propertyListing.category,
             }}
             onSubmit={values => {
               const payload = {
@@ -62,6 +66,7 @@ const EditPropertyListing = (props: any) => {
                 handleChange,
                 handleSubmit,
                 handleReset,
+                setFieldValue,
               } = props
 
               return (
@@ -76,6 +81,33 @@ const EditPropertyListing = (props: any) => {
                           error={''}
                           value={values.name}
                           onChange={handleChange}
+                        />
+
+                        <TextInput
+                          name="location"
+                          type="text"
+                          placeholder="Location"
+                          error={''}
+                          value={values.location}
+                          onChange={handleChange}
+                        />
+
+                        <TextInput
+                          name="price"
+                          type="number"
+                          placeholder="Price"
+                          error={''}
+                          value={values.price}
+                          onChange={handleChange}
+                        />
+
+                        <Select
+                          name="category"
+                          list={propertyCategory}
+                          placeholder="Select Position"
+                          value={values.category}
+                          setFieldValue={setFieldValue}
+                          error={''}
                         />
 
                         <Button
@@ -144,3 +176,8 @@ const styles = {
     right: 20px;
   `,
 }
+
+const propertyCategory = [
+  { id: 'LAND', name: 'Land' },
+  { id: 'HOUSE', name: 'House' },
+]
