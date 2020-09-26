@@ -1,6 +1,7 @@
 import { connect } from 'react-redux'
 import {
   fetchUsers,
+  getUsers,
   getUserById,
   createUser,
   updateUser,
@@ -13,6 +14,7 @@ const mapStateToProps = (state: AppState, { match: { params } }: any) => {
     loading: state.users.loading,
     error: state.users.error,
     user: getUserById(state, Number(params.id)),
+    users: getUsers(state),
   }
 }
 

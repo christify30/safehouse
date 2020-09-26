@@ -56,7 +56,14 @@ const DueDiligence = (props: any) => {
 
 export default DueDiligenceContainer(DueDiligence)
 
-const tableHeader = [{ title: 'Department name', key: 'name' }]
+const tableHeader = [
+  { title: 'First name', key: 'firstName' },
+  { title: 'Last name', key: 'lastName' },
+  { title: 'Email', key: 'email' },
+  { title: 'Phone Number', key: 'phoneNumber' },
+  { title: 'Status', key: 'transactionStatus' },
+  { title: 'Created', key: 'createdAt' },
+]
 
 const styles = (props: ThemeProps) => ({
   container: css`

@@ -23,9 +23,9 @@ export const fetchUsersEpic = (action$: ActionsObservable<any>) =>
   action$.pipe(
     ofType<fetchUsersAction>(FETCH_USERS),
     mergeMap(() =>
-      from(api.get({ url: '/api/user' })).pipe(
+      from(api.get({ url: '/auth/users' })).pipe(
         map((response: any) => {
-          return fetchUsersSuccess(response)
+          return fetchUsersSuccess(response.users)
         }),
         catchError(error => of(setUserError(error.message)))
       )
@@ -36,7 +36,7 @@ export const createUsersEpic = (action$: ActionsObservable<any>) =>
   action$.pipe(
     ofType<createUserAction>(CREATE_USER),
     mergeMap(action =>
-      from(api.post({ url: '/api/user', data: action.payload })).pipe(
+      from(api.post({ url: '/auth/user', data: action.payload })).pipe(
         map((response: any) => {
           history.push('/users')
           return createUserSuccess(response)
@@ -52,7 +52,7 @@ export const updateUsersEpic = (action$: ActionsObservable<any>) =>
     mergeMap(action =>
       from(
         api.put({
-          url: `/api/user/${action.payload.id}`,
+          url: `/auth/user/${action.payload.id}`,
           data: action.payload.data,
         })
       ).pipe(
@@ -69,7 +69,7 @@ export const deleteUsersEpic = (action$: ActionsObservable<any>) =>
   action$.pipe(
     ofType<DeleteUserAction>(DELETE_USER),
     mergeMap(action =>
-      from(api.delete({ url: `/api/user/${action.payload}` })).pipe(
+      from(api.delete({ url: `/auth/user/${action.payload}` })).pipe(
         map((response: any) => {
           history.push('/users')
           return deleteUserSuccess(response)

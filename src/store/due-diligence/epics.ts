@@ -26,7 +26,7 @@ export const fetchDueDiligenceEpic = (action$: ActionsObservable<any>) =>
     mergeMap(() =>
       from(api.get({ url: '/due-diligence' })).pipe(
         map((response: any) => {
-          return fetchDueDiligenceSuccess(response)
+          return fetchDueDiligenceSuccess(response.requests)
         }),
         catchError(error => of(setDueDiligenceError(error.message)))
       )

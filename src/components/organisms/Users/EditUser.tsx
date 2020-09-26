@@ -65,10 +65,11 @@ const EditUser = (props: any) => {
               updateUser(payload)
             }}
             validationSchema={Yup.object().shape({
-              name: Yup.string().required('Name is Required'),
-              surname: Yup.string().required('Surname is Required'),
-              positionsId: Yup.number().required('Position is Required'),
-              departmentsId: Yup.number().required('Department is Required'),
+              firstName: Yup.string().required('First Name is Required'),
+              lastName: Yup.string().required('Last Name is Required'),
+              email: Yup.string().required('Email is Required'),
+              Country: Yup.string().required('Country is Required'),
+              role: Yup.string().required('Role is Required'),
               comments: Yup.string(),
             })}>
             {props => {
@@ -86,36 +87,37 @@ const EditUser = (props: any) => {
                     <TabPane tabIndex={1} tabName="General Information">
                       <form css={styles.form}>
                         <TextInput
-                          name="name"
+                          name="firstName"
                           type="text"
-                          placeholder="Name"
+                          placeholder="First Name"
                           error={''}
-                          value={values.name}
+                          value={values.firstName}
                           onChange={handleChange}
                         />
 
                         <TextInput
-                          name="surname"
+                          name="lastName"
                           type="text"
-                          placeholder="Surname"
+                          placeholder="Last Name"
                           error={''}
-                          value={values.surname}
+                          value={values.lastName}
+                          onChange={handleChange}
+                        />
+
+                        <TextInput
+                          name="email"
+                          type="text"
+                          placeholder="Email"
+                          error={''}
+                          value={values.email}
                           onChange={handleChange}
                         />
 
                         <Select
-                          name="positionsId"
+                          name="role"
                           list={positionsList}
-                          placeholder="Select Position"
-                          value={values.positionsId}
-                          setFieldValue={setFieldValue}
-                          error={''}
-                        />
-                        <Select
-                          name="departmentsId"
-                          list={departmentsList}
-                          placeholder="Select Department"
-                          value={values.departmentsId}
+                          placeholder="Select role"
+                          value={values.role}
                           setFieldValue={setFieldValue}
                           error={''}
                         />
@@ -140,36 +142,7 @@ const EditUser = (props: any) => {
                         </Button>
                       </form>
                     </TabPane>
-                    <TabPane tabIndex={2} tabName="Comments">
-                      <form css={styles.form}>
-                        <TextInput
-                          name="comments"
-                          type="text"
-                          placeholder="Comments"
-                          error={''}
-                          value={values.comments}
-                          onChange={handleChange}
-                        />
-                        <div css={styles.buttonWrapper}>
-                          <Button
-                            styleType="primary"
-                            icon="save"
-                            css={css`
-                              ${styles.button};
-                              margin-right: 10px;
-                            `}
-                            onClick={handleSubmit}>
-                            Save
-                          </Button>
-                          <Button
-                            styleType="secondary"
-                            css={styles.button}
-                            onClick={handleCancel}>
-                            Cancel
-                          </Button>
-                        </div>
-                      </form>
-                    </TabPane>
+                    <TabPane tabIndex={2} tabName="KYC Docs"></TabPane>
                   </Tab>
                 </section>
               )
