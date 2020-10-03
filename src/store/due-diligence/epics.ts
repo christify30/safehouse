@@ -53,8 +53,8 @@ export const updateDueDiligenceEpic = (action$: ActionsObservable<any>) =>
     mergeMap(action =>
       from(
         api.put({
-          url: `/due-diligence/${action.payload.id}`,
-          data: action.payload.data,
+          url: `/due-diligence/update`,
+          data: action.payload,
         })
       ).pipe(
         map((response: CreateDueDiligenceData) => {

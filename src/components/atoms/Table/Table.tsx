@@ -67,6 +67,9 @@ const styles = (props: ThemeProps) => ({
       font-weight: 500;
       border-top: 2px solid #62e000;
     }
+    tr {
+      cursor: pointer;
+    }
     @media screen and (max-width: 780px) {
       th {
         display: none;

@@ -52,8 +52,8 @@ export const updateUsersEpic = (action$: ActionsObservable<any>) =>
     mergeMap(action =>
       from(
         api.put({
-          url: `/auth/user/${action.payload.id}`,
-          data: action.payload.data,
+          url: `/auth/user`,
+          data: action.payload,
         })
       ).pipe(
         map((response: any) => {

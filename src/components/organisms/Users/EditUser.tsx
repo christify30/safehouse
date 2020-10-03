@@ -17,25 +17,11 @@ import {
 import { history } from 'utils'
 
 const EditUser = (props: any) => {
-  const {
-    loading,
-    error,
-    positions: positionsList,
-    departments: departmentsList,
-    updateUser,
-    user,
-    fetchUsers,
-    fetchPositions,
-    fetchDepartments,
-    users,
-  } = props
-
-  console.log(user)
-  console.log(users)
+  const { loading, error, updateUser, user, fetchUsers, users } = props
 
   useEffect(() => {
-    if (!user) {
-      // fetchUsers()
+    if (!users.length) {
+      fetchUsers()
     }
   }, [])
 
@@ -48,7 +34,7 @@ const EditUser = (props: any) => {
       {user && (
         <section>
           <Header
-            title={`${user.name} ${user.surname}`}
+            title={`${user.firstName} ${user.lastName}`}
             buttonUrl={`/users/delete/${user.id}`}
             buttonType="secondary"
             buttonIcon="delete"
@@ -59,8 +45,8 @@ const EditUser = (props: any) => {
             initialValues={user}
             onSubmit={values => {
               const payload = {
-                id: user.id,
-                data: values,
+                id: user._id,
+                ...values,
               }
               updateUser(payload)
             }}
@@ -68,7 +54,7 @@ const EditUser = (props: any) => {
               firstName: Yup.string().required('First Name is Required'),
               lastName: Yup.string().required('Last Name is Required'),
               email: Yup.string().required('Email is Required'),
-              Country: Yup.string().required('Country is Required'),
+              country: Yup.string().required('Country is Required'),
               role: Yup.string().required('Role is Required'),
               comments: Yup.string(),
             })}>
@@ -113,9 +99,27 @@ const EditUser = (props: any) => {
                           onChange={handleChange}
                         />
 
+                        <TextInput
+                          name="phoneNumber"
+                          type="text"
+                          placeholder="Phone Number"
+                          error={''}
+                          value={values.phoneNumber}
+                          onChange={handleChange}
+                        />
+
+                        <TextInput
+                          name="country"
+                          type="text"
+                          placeholder="Country"
+                          error={''}
+                          value={values.country}
+                          onChange={handleChange}
+                        />
+
                         <Select
                           name="role"
-                          list={positionsList}
+                          list={userRoleOption}
                           placeholder="Select role"
                           value={values.role}
                           setFieldValue={setFieldValue}
@@ -142,7 +146,7 @@ const EditUser = (props: any) => {
                         </Button>
                       </form>
                     </TabPane>
-                    <TabPane tabIndex={2} tabName="KYC Docs"></TabPane>
+                    <TabPane tabIndex={2} tabName="KYC Documents"></TabPane>
                   </Tab>
                 </section>
               )
@@ -192,3 +196,8 @@ const styles = {
     padding: 20px;
   `,
 }
+
+const userRoleOption = [
+  { id: 'ADMIN', name: 'ADMIN' },
+  { id: 'USER', name: 'USER' },
+]
