@@ -45,7 +45,7 @@ const EditDueDiligence = (props: any) => {
           <Formik
             initialValues={{
               firstName: dueDiligence.firstName,
-              lastName: dueDiligence.firstName,
+              lastName: dueDiligence.lastName,
               phoneNumber: dueDiligence.phoneNumber,
               email: dueDiligence.email,
               propertyOwnerName: dueDiligence.propertyOwnerName,
@@ -94,109 +94,175 @@ const EditDueDiligence = (props: any) => {
                 <section css={styles.tabContainer}>
                   <Tab activeTab="1">
                     <TabPane tabIndex={1} tabName="General Information">
-                      <form css={styles.form}>
-                        <TextInput
-                          name="transactionReference"
-                          type="text"
-                          placeholder="Transaction Reference"
-                          error={''}
-                          value={values.transactionReference}
-                          onChange={handleChange}
-                          disabled
-                        />
+                      <div css={styles.wrapper}>
+                        <form css={styles.form}>
+                          <TextInput
+                            name="transactionReference"
+                            type="text"
+                            placeholder="Transaction Reference"
+                            error={''}
+                            value={values.transactionReference}
+                            onChange={handleChange}
+                            disabled
+                          />
 
-                        <Select
-                          name="transactionStatus"
-                          list={transactionStatusOptions}
-                          placeholder="Status"
-                          value={values.transactionStatus}
-                          setFieldValue={setFieldValue}
-                          error={''}
-                        />
+                          <Select
+                            name="transactionStatus"
+                            list={transactionStatusOptions}
+                            placeholder="Status"
+                            value={values.transactionStatus}
+                            setFieldValue={setFieldValue}
+                            error={''}
+                          />
 
-                        <TextInput
-                          name="firstName"
-                          type="text"
-                          placeholder="First Name"
-                          error={''}
-                          value={values.firstName}
-                          onChange={handleChange}
-                        />
+                          <TextInput
+                            name="firstName"
+                            type="text"
+                            placeholder="First Name"
+                            error={''}
+                            value={values.firstName}
+                            onChange={handleChange}
+                          />
 
-                        <TextInput
-                          name="lastName"
-                          type="text"
-                          placeholder="Last Name"
-                          error={''}
-                          value={values.lastName}
-                          onChange={handleChange}
-                        />
+                          <TextInput
+                            name="lastName"
+                            type="text"
+                            placeholder="Last Name"
+                            error={''}
+                            value={values.lastName}
+                            onChange={handleChange}
+                          />
 
-                        <TextInput
-                          name="phoneNumber"
-                          type="text"
-                          placeholder="Phone Number"
-                          error={''}
-                          value={values.phoneNumber}
-                          onChange={handleChange}
-                        />
+                          <TextInput
+                            name="phoneNumber"
+                            type="text"
+                            placeholder="Phone Number"
+                            error={''}
+                            value={values.phoneNumber}
+                            onChange={handleChange}
+                          />
 
-                        <TextInput
-                          name="email"
-                          type="text"
-                          placeholder="Email"
-                          error={''}
-                          value={values.email}
-                          onChange={handleChange}
-                          disabled={true}
-                        />
+                          <TextInput
+                            name="email"
+                            type="text"
+                            placeholder="Email"
+                            error={''}
+                            value={values.email}
+                            onChange={handleChange}
+                            disabled={true}
+                          />
 
-                        <TextInput
-                          name="propertyOwnerName"
-                          type="text"
-                          placeholder="Property Owner Name"
-                          error={''}
-                          value={values.propertyOwnerName}
-                          onChange={handleChange}
-                        />
+                          <TextInput
+                            name="propertyOwnerName"
+                            type="text"
+                            placeholder="Property Owner Name"
+                            error={''}
+                            value={values.propertyOwnerName}
+                            onChange={handleChange}
+                          />
 
-                        <TextInput
-                          name="propertyAddress"
-                          type="text"
-                          placeholder="Property Address"
-                          error={''}
-                          value={values.propertyAddress}
-                          onChange={handleChange}
-                        />
+                          <TextInput
+                            name="propertyAddress"
+                            type="text"
+                            placeholder="Property Address"
+                            error={''}
+                            value={values.propertyAddress}
+                            onChange={handleChange}
+                          />
 
-                        <TextInput
-                          name="titleDeed"
-                          type="text"
-                          placeholder="Title Deed"
-                          error={''}
-                          value={values.titleDeed}
-                          onChange={handleChange}
-                        />
+                          <TextInput
+                            name="titleDeed"
+                            type="text"
+                            placeholder="Title Deed"
+                            error={''}
+                            value={values.titleDeed}
+                            onChange={handleChange}
+                          />
 
-                        <Button
-                          styleType="primary"
-                          icon={loading ? 'loader' : 'save'}
-                          type="submit"
-                          onClick={handleSubmit}
-                          css={css`
-                            ${styles.button};
-                            margin-right: 10px;
-                          `}>
-                          Update
-                        </Button>
+                          <Button
+                            styleType="primary"
+                            icon={loading ? 'loader' : 'save'}
+                            type="submit"
+                            onClick={handleSubmit}
+                            css={css`
+                              ${styles.button};
+                              margin-right: 10px;
+                            `}>
+                            Update
+                          </Button>
 
-                        <Button
-                          styleType="secondary"
-                          css={styles.button}
-                          onClick={handleReset}>
-                          Cancel
-                        </Button>
-                      </form>
+                          <Button
+                            styleType="secondary"
+                            css={styles.button}
+                            onClick={handleReset}>
+                            Cancel
+                          </Button>
+                        </form>
+                        <div css={styles.paymentDetails}>
+                          <TextInput
+                            type="text"
+                            name="Payment Transaction ID"
+                            placeholder="Payment Transaction ID"
+                            error={''}
+                            value={dueDiligence.payment.transactionId || ''}
+                            disabled
+                          />
+                          <TextInput
+                            type="text"
+                            name="Payment Transaction Reference"
+                            placeholder="Payment Transaction Reference"
+                            error={''}
+                            value={
+                              dueDiligence.payment
+                                .processorTransactionReference || ''
+                            }
+                            disabled
+                          />
+                          <TextInput
+                            type="text"
+                            name="Payment Transaction Reference"
+                            placeholder="Payment Transaction Reference"
+                            error={''}
+                            value={
+                              dueDiligence.payment
+                                .processorTransactionReference || ''
+                            }
+                            disabled
+                          />
+                          <TextInput
+                            type="text"
+                            name="Payment Reference"
+                            placeholder="Payment Reference"
+                            error={''}
+                            value={dueDiligence.payment.paymentReference || ''}
+                            disabled
+                          />
+                          <TextInput
+                            type="text"
+                            name="Payment Status"
+                            placeholder="Payment Status"
+                            error={''}
+                            value={dueDiligence.payment.status || ''}
+                            disabled
+                          />
+                          <TextInput
+                            type="text"
+                            name="Amount Paid"
+                            placeholder="Amount Paid"
+                            error={''}
+                            value={dueDiligence.payment.amount || ''}
+                            disabled
+                          />
+                          <TextInput
+                            type="text"
+                            name="Payment Currency"
+                            placeholder="Payment Currency"
+                            error={''}
+                            value={dueDiligence.payment.currency || ''}
+                            disabled
+                          />
+                        </div>
+                      </div>
                     </TabPane>
                     <TabPane tabIndex={2} tabName="Reports"></TabPane>
                   </Tab>
@@ -232,7 +298,6 @@ const styles = {
   `,
   form: css`
     width: 50%;
-    padding: 20px;
   `,
   button: css`
     width: 120px;
@@ -242,6 +307,14 @@ const styles = {
     position: absolute;
     bottom: 20px;
     right: 20px;
+  `,
+  wrapper: css`
+    display: flex;
+    align-items: baseline;
+    padding: 20px;
+  `,
+  paymentDetails: css`
+    flex: 1;
   `,
 }
 

@@ -25,6 +25,7 @@
     "jwt-decode": "^2.2.0",
     "lodash": "4.17.11",
     "moment": "2.24.0",
+    "multiselect-react-dropdown": "^1.6.1",
     "react": "16.8.6",
     "react-dom": "16.8.6",
     "react-redux": "^7.1.1",

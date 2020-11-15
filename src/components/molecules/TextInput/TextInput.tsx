@@ -11,7 +11,7 @@ interface TextInputProps {
   error: string
   value: string
   disabled?: boolean
-  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void
+  onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void
 }
 
 export const TextInput = (props: TextInputProps) => {

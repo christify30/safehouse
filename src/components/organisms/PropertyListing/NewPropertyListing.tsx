@@ -19,6 +19,8 @@ const PropertyListing = (props: any) => {
               error={error}
             />
           </TabPane>
+          <TabPane tabIndex={2} tabName="Comments"></TabPane>
+          <TabPane tabIndex={3} tabName="Transactions"></TabPane>
         </Tab>
       </section>
       {error && (
