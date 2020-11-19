@@ -1,12 +1,21 @@
-image: node:latest
+image: thrillworks/node-build
 
-before_script:
-  - yarn install
+cache:
+  paths:
+    - node_modules
+
+stages:
+  - build
+  - deploy
 
 pages:
   stage: deploy
+  environment: 
+    name: development
+    url: https://safehousetech.gitlab.io/
   script:
-    - CI=true yarn run build
+    - npm install
+    - npm run build
     - rm -rf public
     - mv build public
   artifacts:
