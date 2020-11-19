@@ -1,0 +1,31 @@
+{
+  "files": {
+    "main.js": "/static/js/main.8f8cbe6d.chunk.js",
+    "main.js.map": "/static/js/main.8f8cbe6d.chunk.js.map",
+    "runtime~main.js": "/static/js/runtime~main.a8a9905a.js",
+    "runtime~main.js.map": "/static/js/runtime~main.a8a9905a.js.map",
+    "static/js/2.88780868.chunk.js": "/static/js/2.88780868.chunk.js",
+    "static/js/2.88780868.chunk.js.map": "/static/js/2.88780868.chunk.js.map",
+    "index.html": "/index.html",
+    "precache-manifest.d3065521978f87c43b8c04327d7278d9.js": "/precache-manifest.d3065521978f87c43b8c04327d7278d9.js",
+    "service-worker.js": "/service-worker.js",
+    "static/media/TitilliumWeb-Bold.ttf": "/static/media/TitilliumWeb-Bold.08d37409.ttf",
+    "static/media/TitilliumWeb-Light.ttf": "/static/media/TitilliumWeb-Light.edc21ba4.ttf",
+    "static/media/TitilliumWeb-Regular.ttf": "/static/media/TitilliumWeb-Regular.ed1d014b.ttf",
+    "static/media/arrow-down.b4062087.svg": "/static/media/arrow-down.b4062087.svg",
+    "static/media/arrow-up.a9308ba9.svg": "/static/media/arrow-up.a9308ba9.svg",
+    "static/media/burger.10335a12.svg": "/static/media/burger.10335a12.svg",
+    "static/media/close.16879c2a.svg": "/static/media/close.16879c2a.svg",
+    "static/media/delete.4b868c50.svg": "/static/media/delete.4b868c50.svg",
+    "static/media/departments.b83f1b16.svg": "/static/media/departments.b83f1b16.svg",
+    "static/media/error.7e439557.svg": "/static/media/error.7e439557.svg",
+    "static/media/info.664e24db.svg": "/static/media/info.664e24db.svg",
+    "static/media/loader.96c857a3.svg": "/static/media/loader.96c857a3.svg",
+    "static/media/logout.a26a0ce7.svg": "/static/media/logout.a26a0ce7.svg",
+    "static/media/onboarding.691f5ad6.svg": "/static/media/onboarding.691f5ad6.svg",
+    "static/media/save.77aa18e5.svg": "/static/media/save.77aa18e5.svg",
+    "static/media/success.576764e2.svg": "/static/media/success.576764e2.svg",
+    "static/media/user.3f0b5adb.svg": "/static/media/user.3f0b5adb.svg",
+    "static/media/users.a5130468.svg": "/static/media/users.a5130468.svg"
+  }
+}
