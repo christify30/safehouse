@@ -14,6 +14,8 @@ pages:
     name: development
     url: https://safehousetech.gitlab.io/
   script:
+    - npm cache clean --force
+    - rm rf node_modules
     - npm install
     - npm run build
     - rm -rf public
