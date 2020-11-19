@@ -14,10 +14,10 @@ pages:
     name: development
     url: https://safehousetech.gitlab.io/
   script:
-    # - npm install
-    # - npm run build
+    - npm install
+    - npm run build
     - rm -rf public
-    - mv prebuild public
+    - mv build public
   artifacts:
     paths:
       - public 
