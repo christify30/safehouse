@@ -1,71 +1,74 @@
 image: thrillworks/node-build
 cache:
   paths:
-    - node_modules/
+    - node_modules
 
 stages:
   - build
   - deploy
 
-build:uat:
+.build:
   stage: build
-  image: thrillworks/node-build
+    image: thrillworks/node-build
+    before_script:
+      - export REACT_APP_API_URL=$REACT_APP_API_URL
+    script:
+      - npm install
+      - CI= npm run build
+      - rm -rf build/
+      - npm run build
+
+build:uat:
+  extends: [.build]
+  when: always
   environment:
     name: uat
-  when: always
-  before_script:
-    - export REACT_APP_API_URL=$REACT_APP_API_URL
-  script:
-    - npm install
-    - npm run build
+    url: https://uat.admin.buysafehouse.com
   artifacts:
     paths:
       - build/
-    expire_in: 1 hour
+    expire_in: 1 day
 
 build:production:
-  stage: build
-  image: thrillworks/node-build
+  extends: [.build]
   environment:
     name: production
+    url: https://admin.buysafehouse.com
   only:
     - master
-  script:
-    - npm install
-    - npm run build
   artifacts:
     paths:
       - build/
     expire_in: 1 week
 
-deploy:uat:
+.deploy:
   image: python:latest
   stage: deploy
+  script:
+    - pip install --quiet awscli
+    - aws configure set aws_access_key_id $AWS_ACCESS_KEY_ID
+    - aws configure set aws_secret_access_key $AWS_SECRET_ACCESS_KEY
+    - aws s3 rm s3://$BUCKET_NAME --recursive
+    - aws s3 sync ./build s3://$BUCKET_NAME --acl public-read
+
+deploy:uat:
+  extends: [.deploy]
   environment:
     name: uat
+    url: https://admin.uat.buysafehouse.com
   only:
     - develop
   dependencies:
     - build:uat
-  script:
-    - pip install --quiet awscli
-    - aws configure set aws_access_key_id $AWS_ACCESS_KEY_ID
-    - aws configure set aws_secret_access_key $AWS_SECRET_ACCESS_KEY
-    - aws s3 rm s3://admin.uat.buysafehouse.com --recursive
-    - aws s3 sync ./build s3://admin.uat.buysafehouse.com --acl public-read
 
 deploy:production:
+  extends: [.deploy]
   image: python:latest
   stage: deploy
   environment:
     name: production
+    url: https://admin.buysafehouse.com
   only:
     - master
   dependencies:
     - build:production
-  script:
-    - pip install --quiet awscli
-    - aws configure set aws_access_key_id $AWS_ACCESS_KEY_ID
-    - aws configure set aws_secret_access_key $AWS_SECRET_ACCESS_KEY
-    - aws s3 rm s3://admin.buysafehouse.com --recursive
-    - aws s3 sync ./build s3://admin.buysafehouse.com --acl public-read
