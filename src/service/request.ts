@@ -1,7 +1,6 @@
 import { getToken } from '../utils/session'
-import { history } from 'utils'
-
-const apiBaseUrl = 'https://api.uat.buysafehouse.com/api'
+import config from '../config'
+const { apiBaseUrl } = config
 
 export interface Options {
   url: string

@@ -1,25 +1,79 @@
-image: node:12
-
+image: thrillworks/node-build
 cache:
   paths:
-    - node_modules
+    - node_modules/
 
 stages:
   - build
   - deploy
 
-pages:
-  stage: deploy
-  environment: 
-    name: development
-    url: https://safehousetech.gitlab.io/
+build:uat:
+  stage: build
+  image: thrillworks/node-build
+  environment:
+    name: uat
+  when: always
+  cache:
+    paths:
+      - node_modules/
+  before_script:
+    - export REACT_APP_API_URL=$REACT_APP_API_URL
   script:
     - npm install
-    - CI= npm run build
-    - rm -rf public
-    - mv build public
+    - npm run build:clean
+    - npm run build
   artifacts:
     paths:
-      - public 
+      - build/
+    expire_in: 1 hour
+
+build:production:
+  stage: build
+  image: thrillworks/node-build
+  environment:
+    name: production
+  only:
+    - master
+  cache:
+    paths:
+      - node_modules/
+  script:
+    - npm install
+    - npm run build:clean
+    - npm run build
+  artifacts:
+    paths:
+      - build/
+    expire_in: 1 week
+
+deploy:uat:
+  image: python:latest
+  stage: deploy
+  environment:
+    name: uat
   only:
     - develop
+  dependencies:
+    - build:uat
+  script:
+    - pip install --quiet awscli
+    - aws configure set aws_access_key_id $AWS_ACCESS_KEY_ID
+    - aws configure set aws_secret_access_key $AWS_SECRET_ACCESS_KEY
+    - aws s3 rm s3://admin.uat.buysafehouse.com --recursive
+    - aws s3 sync ./build s3://admin.uat.buysafehouse.com --acl public-read
+
+deploy:production:
+  image: python:latest
+  stage: deploy
+  environment:
+    name: production
+  only:
+    - master
+  dependencies:
+    - build:production
+  script:
+    - pip install --quiet awscli
+    - aws configure set aws_access_key_id $AWS_ACCESS_KEY_ID
+    - aws configure set aws_secret_access_key $AWS_SECRET_ACCESS_KEY
+    - aws s3 rm s3://admin.buysafehouse.com --recursive
+    - aws s3 sync ./build s3://admin.buysafehouse.com --acl public-read
