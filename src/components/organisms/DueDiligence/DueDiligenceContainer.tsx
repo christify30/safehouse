@@ -11,10 +11,10 @@ import { AppState } from 'store/reducers'
 
 const mapStateToProps = (state: AppState, { match: { params } }: any) => {
   return {
-    dueDiligence: getDueDiligence(state),
+    dueDiligenceList: getDueDiligence(state),
     loading: state.dueDiligence.loading,
     error: state.dueDiligence.error,
-    department: getDueDiligenceById(state, Number(params.id)),
+    dueDiligence: getDueDiligenceById(state, params.id),
   }
 }
 

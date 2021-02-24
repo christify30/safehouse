@@ -14,7 +14,7 @@ const mapStateToProps = (state: AppState, { match: { params } }: any) => {
     propertyListings: getPropertyListings(state),
     loading: state.propertyListing.loading,
     error: state.propertyListing.error,
-    propertyListing: getPropertyListingsById(state, Number(params.id)),
+    propertyListing: getPropertyListingsById(state, params.id),
   }
 }
 

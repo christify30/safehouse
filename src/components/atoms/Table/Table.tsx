@@ -20,7 +20,7 @@ export const Table = <T extends {}>(props: TableProps<T>) => {
   const classes = styles({ theme })
   const { tableData, tableHeader, route } = props
 
-  const getUser = (id: number) => {
+  const getUser = (id: string) => {
     history.push(`${route}/edit/${id}`)
   }
 
@@ -36,7 +36,7 @@ export const Table = <T extends {}>(props: TableProps<T>) => {
       <tbody>
         {tableData.map((data: any) => {
           return (
-            <tr onClick={() => getUser(data.id)}>
+            <tr onClick={() => getUser(data._id)}>
               {tableHeader.map(({ key }) => (
                 <td key={data.key}>{data[key]}</td>
               ))}
@@ -66,6 +66,9 @@ const styles = (props: ThemeProps) => ({
     th {
       font-weight: 500;
       border-top: 2px solid #62e000;
+    }
+    tr {
+      cursor: pointer;
     }
     @media screen and (max-width: 780px) {
       th {

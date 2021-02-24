@@ -1,7 +1,6 @@
 import { getToken } from '../utils/session'
-import { history } from 'utils'
-
-const apiBaseUrl = 'https://api.uat.buysafehouse.com/api'
+import config from '../config'
+const { apiBaseUrl } = config
 
 export interface Options {
   url: string
@@ -36,10 +35,6 @@ export const makeRequest = (
   const defer = new Promise(function(resolve, reject) {
     fetch(request)
       .then(response => {
-        if (response.status === 401) {
-          history.push('/logout')
-          return
-        }
         if (response.ok) {
           return resolve(response.json())
         } else {

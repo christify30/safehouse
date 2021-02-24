@@ -10,11 +10,12 @@ interface TextInputProps {
   placeholder: string
   error: string
   value: string
-  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void
+  disabled?: boolean
+  onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void
 }
 
 export const TextInput = (props: TextInputProps) => {
-  const { name, type, placeholder, error, value, onChange } = props
+  const { name, type, placeholder, error, value, onChange, disabled } = props
   const classes = styles({ ...props, theme })
 
   return (
@@ -26,6 +27,7 @@ export const TextInput = (props: TextInputProps) => {
         name={name}
         onChange={onChange}
         value={value}
+        disabled={disabled}
       />
       <label css={classes.label} htmlFor={name}>
         {placeholder}
@@ -63,6 +65,7 @@ const styles = (props: TextInputProps & ThemeProps) => ({
       ? `1px solid ${theme.getColor('error', 400)(props)}`
       : `1px solid ${theme.getColor('grey', 400)(props)}`};
     width: 100%;
+    cursor: ${props.disabled && 'not-allowed'};
 
     &:placeholder-shown + label {
       opacity: 0;

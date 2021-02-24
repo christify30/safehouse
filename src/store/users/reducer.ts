@@ -13,7 +13,7 @@ import {
 } from './actions'
 
 export interface User {
-  id: number
+  _id: number
   name: string
   surname: string
   photo: string
@@ -51,9 +51,9 @@ export const usersReducer = (state = initialState, action: any) => {
     case FETCH_USERS_SUCCESS:
       return {
         ...state,
-        data: action.payload.map((user: User) => user.id),
+        data: action.payload.map((user: User) => user._id),
         byId: action.payload.reduce((acc: UserIndex, curr: User) => {
-          acc[curr.id] = curr
+          acc[curr._id] = curr
           return acc
         }, {}),
         loading: false,

@@ -11,7 +11,7 @@ const DueDiligence = (props: any) => {
     props.fetchDueDiligences()
   }, [])
 
-  const { dueDiligence, loading, error } = props
+  const { dueDiligenceList, loading, error } = props
   const classes = styles({ theme })
 
   return (
@@ -27,14 +27,14 @@ const DueDiligence = (props: any) => {
           <Loader />
         ) : (
           <React.Fragment>
-            {!error && dueDiligence.length > 0 && (
+            {!error && dueDiligenceList.length > 0 && (
               <Table
-                tableData={dueDiligence}
+                tableData={dueDiligenceList}
                 tableHeader={tableHeader}
                 route="due-diligence"
               />
             )}
-            {dueDiligence && dueDiligence.length === 0 && (
+            {dueDiligenceList && dueDiligenceList.length === 0 && (
               <React.Fragment>
                 <Text text="There is no data to show currently" />{' '}
                 <Link to="/due-diligence/new">Create New Record</Link>
@@ -56,7 +56,15 @@ const DueDiligence = (props: any) => {
 
 export default DueDiligenceContainer(DueDiligence)
 
-const tableHeader = [{ title: 'Department name', key: 'name' }]
+const tableHeader = [
+  { title: 'First name', key: 'firstName' },
+  { title: 'Last name', key: 'lastName' },
+  { title: 'Email', key: 'email' },
+  { title: 'Phone Number', key: 'phoneNumber' },
+  { title: 'Reference', key: 'transactionReference' },
+  { title: 'Status', key: 'transactionStatus' },
+  { title: 'Created', key: 'createdAt' },
+]
 
 const styles = (props: ThemeProps) => ({
   container: css`

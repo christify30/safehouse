@@ -28,21 +28,21 @@ const NewUser = (props: any) => {
       <Header title="New user" />
       <Formik
         initialValues={{
-          name: '',
-          surname: '',
-          positionsId: '',
-          departmentsId: '',
-          comments: '',
+          firstName: '',
+          lastName: '',
+          country: '',
+          phoneNumber: '',
+          email: '',
         }}
         onSubmit={values => {
           createUser(values)
         }}
         validationSchema={Yup.object().shape({
-          name: Yup.string().required('Name is Required'),
-          surname: Yup.string().required('Surname is Required'),
-          positionsId: Yup.string().required('Position is Required'),
-          departmentsId: Yup.string().required('Department is Required'),
-          comments: Yup.string(),
+          firstName: Yup.string().required('First Name is Required'),
+          lastName: Yup.string().required('Last Name is Required'),
+          country: Yup.string().required('Country is Required'),
+          phoneNumber: Yup.string().required('Phone Number is Required'),
+          email: Yup.string().required('Email is Required'),
         })}>
         {props => {
           const {
@@ -60,38 +60,48 @@ const NewUser = (props: any) => {
                 <TabPane tabIndex={1} tabName="General Information">
                   <form css={styles.form}>
                     <TextInput
-                      name="name"
+                      name="firstName"
                       type="text"
-                      placeholder="Name"
-                      error={errors.name || ''}
-                      value={values.name}
+                      placeholder="First Name"
+                      error={errors.firstName || ''}
+                      value={values.firstName}
                       onChange={handleChange}
                     />
 
                     <TextInput
-                      name="surname"
+                      name="lastName"
                       type="text"
-                      placeholder="Surname"
-                      error={errors.surname || ''}
-                      value={values.surname}
+                      placeholder="Last Name"
+                      error={errors.lastName || ''}
+                      value={values.lastName}
                       onChange={handleChange}
                     />
 
-                    <Select
-                      name="positionsId"
-                      list={positionsList}
-                      placeholder="Select Position"
-                      value={values.positionsId}
-                      setFieldValue={setFieldValue}
-                      error={errors.positionsId}
+                    <TextInput
+                      name="email"
+                      type="email"
+                      placeholder="Email"
+                      error={errors.email || ''}
+                      value={values.email}
+                      onChange={handleChange}
                     />
-                    <Select
-                      name="departmentsId"
-                      list={departmentsList}
-                      placeholder="Select Department"
-                      value={values.departmentsId}
-                      setFieldValue={setFieldValue}
-                      error={errors.departmentsId}
+
+                    <TextInput
+                      name="phoneNumber"
+                      type="text"
+                      placeholder="Phone Number"
+                      error={errors.phoneNumber || ''}
+                      value={values.phoneNumber}
+                      onChange={handleChange}
+                    />
+
+                    <TextInput
+                      name="country"
+                      type="text"
+                      placeholder="Country"
+                      error={errors.country || ''}
+                      value={values.country}
+                      onChange={handleChange}
                     />
 
                     <Button
@@ -114,35 +124,7 @@ const NewUser = (props: any) => {
                     </Button>
                   </form>
                 </TabPane>
-                <TabPane tabIndex={2} tabName="Comments">
-                  <form css={styles.form}>
-                    <TextInput
-                      name="comments"
-                      type="text"
-                      placeholder="Comments"
-                      error={errors.comments || ''}
-                      value={values.comments}
-                      onChange={handleChange}
-                    />
-                    <Button
-                      styleType="primary"
-                      icon="save"
-                      css={css`
-                        ${styles.button};
-                        margin-right: 10px;
-                      `}
-                      onClick={handleSubmit}>
-                      Save
-                    </Button>
-
-                    <Button
-                      styleType="secondary"
-                      css={styles.button}
-                      onClick={handleReset}>
-                      Cancel
-                    </Button>
-                  </form>
-                </TabPane>
+                <TabPane tabIndex={2} tabName="Comments"></TabPane>
               </Tab>
             </section>
           )
@@ -183,3 +165,8 @@ const styles = {
     padding: 20px;
   `,
 }
+
+const userRoleOption = [
+  { id: 'ADMIN', name: 'ADMIN' },
+  { id: 'USER', name: 'USER' },
+]

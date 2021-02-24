@@ -11,7 +11,7 @@ import {
 } from './actions'
 
 export interface DueDiligence {
-  id: string
+  _id: string
   firstName: string
   lastName: string
   phoneNumber: string
@@ -20,8 +20,7 @@ export interface DueDiligence {
   propertyAddress: string
   titleDeed: string
   titleSurveyNumber: string
-  transactionReference: string
-  transactionStatus: string
+  transactionStatus: 'INITIATED' | 'IN_PROGRESS' | 'COMPLETED'
 }
 
 interface DueDiligenceIndex {
@@ -52,10 +51,10 @@ export const dueDiligenceReducer = (state = initialState, action: any) => {
     case FETCH_DUEDILIGENCE_SUCCESS:
       return {
         ...state,
-        data: action.payload.map((item: DueDiligence) => item.id),
+        data: action.payload.map((item: DueDiligence) => item._id),
         byId: action.payload.reduce(
           (acc: DueDiligenceIndex, curr: DueDiligence) => {
-            acc[curr.id] = curr
+            acc[curr._id] = curr
             return acc
           },
           {}

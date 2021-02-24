@@ -1,0 +1,73 @@
+image: thrillworks/node-build
+cache:
+  paths:
+    - node_modules
+
+stages:
+  - build
+  - deploy
+
+.build:
+  stage: build
+  image: thrillworks/node-build
+  before_script:
+    - export REACT_APP_API_URL=$REACT_APP_API_URL
+  script:
+    - npm install
+    - rm -rf build/
+    - CI= npm run build
+
+build:uat:
+  extends: [.build]
+  when: always
+  environment:
+    name: uat
+    url: https://uat.admin.buysafehouse.com
+  artifacts:
+    paths:
+      - build/
+    expire_in: 1 day
+
+build:production:
+  extends: [.build]
+  environment:
+    name: production
+    url: https://admin.buysafehouse.com
+  only:
+    - master
+  artifacts:
+    paths:
+      - build/
+    expire_in: 1 week
+
+.deploy:
+  image: python:latest
+  stage: deploy
+  script:
+    - pip install --quiet awscli
+    - aws configure set aws_access_key_id $AWS_ACCESS_KEY_ID
+    - aws configure set aws_secret_access_key $AWS_SECRET_ACCESS_KEY
+    - aws s3 rm s3://$BUCKET_NAME --recursive
+    - aws s3 sync ./build s3://$BUCKET_NAME --acl public-read
+
+deploy:uat:
+  extends: [.deploy]
+  environment:
+    name: uat
+    url: https://admin.uat.buysafehouse.com
+  only:
+    - develop
+  dependencies:
+    - build:uat
+
+deploy:production:
+  extends: [.deploy]
+  image: python:latest
+  stage: deploy
+  environment:
+    name: production
+    url: https://admin.buysafehouse.com
+  only:
+    - master
+  dependencies:
+    - build:production

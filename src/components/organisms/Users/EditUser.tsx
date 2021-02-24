@@ -17,26 +17,10 @@ import {
 import { history } from 'utils'
 
 const EditUser = (props: any) => {
-  const {
-    loading,
-    error,
-    positions: positionsList,
-    departments: departmentsList,
-    updateUser,
-    user,
-    fetchUsers,
-    fetchPositions,
-    fetchDepartments,
-    users,
-  } = props
-
-  console.log(user)
-  console.log(users)
+  const { loading, error, updateUser, user, fetchUsers, users } = props
 
   useEffect(() => {
-    if (!user) {
-      fetchPositions()
-      fetchDepartments()
+    if (!users.length) {
       fetchUsers()
     }
   }, [])
@@ -50,7 +34,7 @@ const EditUser = (props: any) => {
       {user && (
         <section>
           <Header
-            title={`${user.name} ${user.surname}`}
+            title={`${user.firstName} ${user.lastName}`}
             buttonUrl={`/users/delete/${user.id}`}
             buttonType="secondary"
             buttonIcon="delete"
@@ -61,16 +45,17 @@ const EditUser = (props: any) => {
             initialValues={user}
             onSubmit={values => {
               const payload = {
-                id: user.id,
-                data: values,
+                id: user._id,
+                ...values,
               }
               updateUser(payload)
             }}
             validationSchema={Yup.object().shape({
-              name: Yup.string().required('Name is Required'),
-              surname: Yup.string().required('Surname is Required'),
-              positionsId: Yup.number().required('Position is Required'),
-              departmentsId: Yup.number().required('Department is Required'),
+              firstName: Yup.string().required('First Name is Required'),
+              lastName: Yup.string().required('Last Name is Required'),
+              email: Yup.string().required('Email is Required'),
+              country: Yup.string().required('Country is Required'),
+              role: Yup.string().required('Role is Required'),
               comments: Yup.string(),
             })}>
             {props => {
@@ -88,36 +73,55 @@ const EditUser = (props: any) => {
                     <TabPane tabIndex={1} tabName="General Information">
                       <form css={styles.form}>
                         <TextInput
-                          name="name"
+                          name="firstName"
                           type="text"
-                          placeholder="Name"
+                          placeholder="First Name"
                           error={''}
-                          value={values.name}
+                          value={values.firstName}
                           onChange={handleChange}
                         />
 
                         <TextInput
-                          name="surname"
+                          name="lastName"
                           type="text"
-                          placeholder="Surname"
+                          placeholder="Last Name"
                           error={''}
-                          value={values.surname}
+                          value={values.lastName}
+                          onChange={handleChange}
+                        />
+
+                        <TextInput
+                          name="email"
+                          type="text"
+                          placeholder="Email"
+                          error={''}
+                          value={values.email}
+                          onChange={handleChange}
+                        />
+
+                        <TextInput
+                          name="phoneNumber"
+                          type="text"
+                          placeholder="Phone Number"
+                          error={''}
+                          value={values.phoneNumber}
+                          onChange={handleChange}
+                        />
+
+                        <TextInput
+                          name="country"
+                          type="text"
+                          placeholder="Country"
+                          error={''}
+                          value={values.country}
                           onChange={handleChange}
                         />
 
                         <Select
-                          name="positionsId"
-                          list={positionsList}
-                          placeholder="Select Position"
-                          value={values.positionsId}
-                          setFieldValue={setFieldValue}
-                          error={''}
-                        />
-                        <Select
-                          name="departmentsId"
-                          list={departmentsList}
-                          placeholder="Select Department"
-                          value={values.departmentsId}
+                          name="role"
+                          list={userRoleOption}
+                          placeholder="Select role"
+                          value={values.role}
                           setFieldValue={setFieldValue}
                           error={''}
                         />
@@ -142,36 +146,7 @@ const EditUser = (props: any) => {
                         </Button>
                       </form>
                     </TabPane>
-                    <TabPane tabIndex={2} tabName="Comments">
-                      <form css={styles.form}>
-                        <TextInput
-                          name="comments"
-                          type="text"
-                          placeholder="Comments"
-                          error={''}
-                          value={values.comments}
-                          onChange={handleChange}
-                        />
-                        <div css={styles.buttonWrapper}>
-                          <Button
-                            styleType="primary"
-                            icon="save"
-                            css={css`
-                              ${styles.button};
-                              margin-right: 10px;
-                            `}
-                            onClick={handleSubmit}>
-                            Save
-                          </Button>
-                          <Button
-                            styleType="secondary"
-                            css={styles.button}
-                            onClick={handleCancel}>
-                            Cancel
-                          </Button>
-                        </div>
-                      </form>
-                    </TabPane>
+                    <TabPane tabIndex={2} tabName="KYC Documents"></TabPane>
                   </Tab>
                 </section>
               )
@@ -221,3 +196,8 @@ const styles = {
     padding: 20px;
   `,
 }
+
+const userRoleOption = [
+  { id: 'ADMIN', name: 'ADMIN' },
+  { id: 'USER', name: 'USER' },
+]

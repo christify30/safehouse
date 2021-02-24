@@ -8,9 +8,7 @@ import { ThemeProps, theme } from 'theme'
 
 const Users = (props: any) => {
   useEffect(() => {
-    // props.fetchDepartments()
-    // props.fetchPositions()
-    // props.fetchUsers()
+    props.fetchUsers()
   }, [])
 
   const { users, loading, error } = props
@@ -59,12 +57,13 @@ const Users = (props: any) => {
 export default UsersContainer(Users)
 
 const tableHeader = [
-  { title: 'Photo', key: 'photo' },
-  { title: 'Name', key: 'name' },
-  { title: 'Surname', key: 'surname' },
-  { title: 'Position', key: 'position' },
-  { title: 'Department', key: 'department' },
-  { title: 'Comments', key: 'comments' },
+  { title: 'First name', key: 'firstName' },
+  { title: 'Last Name', key: 'lastName' },
+  { title: 'Email', key: 'email' },
+  { title: 'Country', key: 'country' },
+  { title: 'Role', key: 'role' },
+  { title: 'Verified', key: 'verified' },
+  { title: 'Created', key: 'createdAt' },
 ]
 
 const styles = (props: ThemeProps) => ({

@@ -9,7 +9,7 @@ const NewDueDiligence = (props: any) => {
   const { error, createDueDiligence, loading } = props
   return (
     <section css={styles.container}>
-      <Header title="New department" />
+      <Header title="New Due Diligence" />
       <section css={styles.tabContainer}>
         <Tab activeTab="1">
           <TabPane tabIndex={1} tabName="General Information">
