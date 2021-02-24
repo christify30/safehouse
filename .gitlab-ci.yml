@@ -12,6 +12,7 @@ stages:
   image: thrillworks/node-build
   before_script:
     - export REACT_APP_API_URL=$REACT_APP_API_URL
+    - export REACT_APP_ENVIRONMENT_MARKER=$REACT_APP_ENVIRONMENT_MARKER
   script:
     - npm install
     - rm -rf build/
