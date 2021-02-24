@@ -13,14 +13,10 @@ build:uat:
   environment:
     name: uat
   when: always
-  cache:
-    paths:
-      - node_modules/
   before_script:
     - export REACT_APP_API_URL=$REACT_APP_API_URL
   script:
     - npm install
-    - npm run build:clean
     - npm run build
   artifacts:
     paths:
@@ -34,12 +30,8 @@ build:production:
     name: production
   only:
     - master
-  cache:
-    paths:
-      - node_modules/
   script:
     - npm install
-    - npm run build:clean
     - npm run build
   artifacts:
     paths:
