@@ -9,14 +9,14 @@ stages:
 
 .build:
   stage: build
-    image: thrillworks/node-build
-    before_script:
-      - export REACT_APP_API_URL=$REACT_APP_API_URL
-    script:
-      - npm install
-      - CI= npm run build
-      - rm -rf build/
-      - npm run build
+  image: thrillworks/node-build
+  before_script:
+    - export REACT_APP_API_URL=$REACT_APP_API_URL
+  script:
+    - npm install
+    - CI= npm run build
+    - rm -rf build/
+    - npm run build
 
 build:uat:
   extends: [.build]
