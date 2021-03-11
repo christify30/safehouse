@@ -7,15 +7,29 @@ import { Text } from 'components'
 interface TextInputProps {
   name: string
   type: string
+  min?: string
+  max?: string
   placeholder: string
-  error: string
+  error?: string
   value: string
   disabled?: boolean
   onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void
+  onKeyDown?: (e: React.KeyboardEvent<HTMLInputElement>) => void
 }
 
 export const TextInput = (props: TextInputProps) => {
-  const { name, type, placeholder, error, value, onChange, disabled } = props
+  const {
+    name,
+    type,
+    placeholder,
+    min,
+    max,
+    error,
+    value,
+    onChange,
+    onKeyDown,
+    disabled,
+  } = props
   const classes = styles({ ...props, theme })
 
   return (
@@ -25,9 +39,12 @@ export const TextInput = (props: TextInputProps) => {
         placeholder={placeholder}
         type={type}
         name={name}
+        min={min}
+        max={max}
         onChange={onChange}
         value={value}
         disabled={disabled}
+        onKeyDown={onKeyDown}
       />
       <label css={classes.label} htmlFor={name}>
         {placeholder}

@@ -37,9 +37,13 @@ export const Table = <T extends {}>(props: TableProps<T>) => {
         {tableData.map((data: any) => {
           return (
             <tr onClick={() => getUser(data._id)}>
-              {tableHeader.map(({ key }) => (
-                <td key={data.key}>{data[key]}</td>
-              ))}
+              {tableHeader.map(({ key }) =>
+                key === 'createdAt' ? (
+                  <td key={data.key}>{data[key].split('T')[0]}</td>
+                ) : (
+                  <td key={data.key}>{data[key]}</td>
+                )
+              )}
             </tr>
           )
         })}

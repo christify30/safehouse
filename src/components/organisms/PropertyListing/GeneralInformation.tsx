@@ -1,12 +1,23 @@
 /** @jsx jsx */
-import React from 'react'
+import React, { useState } from 'react'
 import { jsx, css } from '@emotion/core'
 import { Formik } from 'formik'
 import * as Yup from 'yup'
-import { TextInput, Button, Select } from 'components'
+import { TextInput, Button, Select, ImageUpload } from 'components'
 
 export const GeneralInformation = (props: any) => {
+  let items: object[] = []
+  const [val, setVal] = useState('')
+
   const { createPosition, loading, error } = props
+
+  const handleEnter = (e: any) => {
+    if (e.keyCode === 13) {
+      // setItems(() => [...items, { key: 1, text: e.target.value }])
+      setVal(e.target.value)
+      items.push({ key: 1, text: val })
+    }
+  }
 
   return (
     <section css={styles.container}>
@@ -15,6 +26,7 @@ export const GeneralInformation = (props: any) => {
           name: '',
           location: '',
           price: '',
+          rating: '',
           category: '',
           description: '',
           basicFeatures: '',
@@ -30,6 +42,8 @@ export const GeneralInformation = (props: any) => {
           name: Yup.string().required('Name is Required'),
           location: Yup.string().required('Location is Required'),
           price: Yup.number().required('Price is Required'),
+          images: Yup.array().required('Please add images'),
+          rating: Yup.number(),
           description: Yup.string().required('Description is Required'),
           category: Yup.string().required('Category is Required'),
           basicFeatures: Yup.string().required('BasicFeatures is Required'),
@@ -77,11 +91,31 @@ export const GeneralInformation = (props: any) => {
                 disabled
               />
               <TextInput
+                name="images"
+                type="file"
+                placeholder="image"
+                error={errors.images || ''}
+                value={values.images}
+              />
+
+              {/* <ImageUpload /> */}
+
+              <TextInput
                 name="price"
-                type="number"
+                type="text"
                 placeholder="Price"
                 error={errors.price || ''}
                 value={values.price}
+                onChange={handleChange}
+              />
+              <TextInput
+                name="rating"
+                type="number"
+                placeholder="rating"
+                min="1"
+                max="5"
+                error={errors.rating || ''}
+                value={values.rating}
                 onChange={handleChange}
               />
 
@@ -94,12 +128,28 @@ export const GeneralInformation = (props: any) => {
                 error={''}
               />
               <Select
-                name="additionalFeatures"
+                name="basicFeatures"
                 list={BasicFeaturesOptions}
                 placeholder="Basic Features"
                 value={values.basicFeatures}
                 setFieldValue={setFieldValue}
                 error={''}
+              />
+
+              {/* <div>
+                {items.map(item => (
+                  <span>{item.key}</span>
+                ))}
+              </div> */}
+
+              <TextInput
+                name="additionalFeatures"
+                type="text"
+                placeholder="AdditionalFeatures"
+                error={errors.additionalFeatures || ''}
+                value={values.additionalFeatures}
+                onChange={handleChange}
+                onKeyDown={handleEnter}
               />
 
               <Button
