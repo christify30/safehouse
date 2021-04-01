@@ -16,12 +16,12 @@ const DueDiligence = (props: any) => {
 
   return (
     <section css={classes.container}>
-      <Header
+      {/* <Header
         title="Due Diligence"
         buttonUrl="/due-diligence/new"
         buttonType="primary"
         buttonText="New Due Diligence record"
-      />
+      /> */}
       <section css={classes.listContainer}>
         {loading ? (
           <Loader />
@@ -69,6 +69,7 @@ const tableHeader = [
 const styles = (props: ThemeProps) => ({
   container: css`
     width: 100%;
+    margin-top: 50px;
   `,
   listContainer: css`
     display: flex;
