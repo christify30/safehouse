@@ -38,9 +38,9 @@ const EditDueDiligence = (props: any) => {
         <section>
           <Header
             title={`${dueDiligence.firstName} ${dueDiligence.lastName}`}
-            buttonType="secondary"
-            buttonUrl={`/due-diligence/delete/${dueDiligence._id}`}
-            buttonText="Delete record"
+            // buttonType="secondary"
+            // buttonUrl={`/due-diligence/delete/${dueDiligence._id}`}
+            // buttonText="Delete record"
           />
           <Formik
             initialValues={{

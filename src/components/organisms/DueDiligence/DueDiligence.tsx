@@ -16,12 +16,9 @@ const DueDiligence = (props: any) => {
 
   return (
     <section css={classes.container}>
-      {/* <Header
-        title="Due Diligence"
-        buttonUrl="/due-diligence/new"
-        buttonType="primary"
-        buttonText="New Due Diligence record"
-      /> */}
+      <Header
+        title="Due Diligence Records"
+      />
       <section css={classes.listContainer}>
         {loading ? (
           <Loader />
