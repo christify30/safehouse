@@ -105,7 +105,7 @@ const NewUser = (props: any) => {
                       onChange={handleChange}
                     />
 
-                    <Wrapper css={styles.wrapper}>
+                    <Wrapper>
                       <Button
                         styleType="primary"
                         icon={loading ? 'loader' : 'save'}
@@ -167,9 +167,6 @@ const styles = {
     width: 50%;
     padding: 20px;
   `,
-  wrapper: css`
-    display: flex;
-  `
 }
 
 const userRoleOption = [

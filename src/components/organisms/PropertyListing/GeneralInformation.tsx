@@ -82,7 +82,7 @@ export const GeneralInformation = (props: any) => {
                 onChange={handleChange}
               />
               
-              <Wrapper css={styles.wrapper}>
+              <Wrapper>
                 <TextInput
                   name="currency"
                   type="text"
@@ -102,7 +102,7 @@ export const GeneralInformation = (props: any) => {
 
               {/* <ImageUpload /> */}
 
-              <Wrapper css={styles.wrapper}>
+              <Wrapper>
                 <TextInput
                   name="price"
                   type="text"
@@ -126,7 +126,7 @@ export const GeneralInformation = (props: any) => {
                 />
               </Wrapper>
               
-              <Wrapper css={styles.wrapper}>
+              <Wrapper>
                 <Select
                   name="category"
                   list={PropertyCategoryOptions}
@@ -203,9 +203,9 @@ const styles = {
   imagePane: css`
     padding: 20px;
   `,
-  wrapper: css`
-    display: flex;
-  `
+  // wrapper: css`
+  //   display: flex;
+  // `
 }
 
 const PropertyCategoryOptions = [
