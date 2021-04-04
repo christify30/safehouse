@@ -12,6 +12,7 @@ import {
   Select,
   Button,
   Header,
+  Wrapper
 } from 'components'
 
 const NewUser = (props: any) => {
@@ -104,24 +105,26 @@ const NewUser = (props: any) => {
                       onChange={handleChange}
                     />
 
-                    <Button
-                      styleType="primary"
-                      icon={loading ? 'loader' : 'save'}
-                      type="submit"
-                      onClick={handleSubmit}
-                      css={css`
-                        ${styles.button};
-                        margin-right: 10px;
-                      `}>
-                      Save
-                    </Button>
+                    <Wrapper css={styles.wrapper}>
+                      <Button
+                        styleType="primary"
+                        icon={loading ? 'loader' : 'save'}
+                        type="submit"
+                        onClick={handleSubmit}
+                        css={css`
+                          ${styles.button};
+                          margin-right: 10px;
+                        `}>
+                        Save
+                      </Button>
 
-                    <Button
-                      styleType="secondary"
-                      css={styles.button}
-                      onClick={handleReset}>
-                      Cancel
-                    </Button>
+                      <Button
+                        styleType="secondary"
+                        css={styles.button}
+                        onClick={handleReset}>
+                        Cancel
+                      </Button>
+                    </Wrapper>
                   </form>
                 </TabPane>
                 <TabPane tabIndex={2} tabName="Comments"></TabPane>
@@ -158,12 +161,15 @@ const styles = {
     right: 20px;
   `,
   button: css`
-    width: 'auto';
+    width: '50%';
   `,
   form: css`
     width: 50%;
     padding: 20px;
   `,
+  wrapper: css`
+    display: flex;
+  `
 }
 
 const userRoleOption = [
