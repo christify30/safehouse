@@ -69,6 +69,8 @@ const tableHeader = [
 const styles = (props: ThemeProps) => ({
   container: css`
     width: 100%;
+    height: 100vh;
+    overflow: hidden;
   `,
   usersContainer: css`
     padding: 0 25px;
