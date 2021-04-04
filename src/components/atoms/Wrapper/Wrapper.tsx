@@ -4,21 +4,21 @@ import { jsx, css } from '@emotion/core'
 import { theme, ThemeProps } from 'theme'
 
 interface WrapperProps {
-  children?: React.ReactNode
+  children: React.ReactNode;
+  className?: string;
 }
 
 export const Wrapper = (props: WrapperProps) => {
   const { children } = props
-  const classes = styles({ ...props, theme })
   return (
-    <div css={classes.wrapper}>
+    <div css={styles.wrapper}>
       {children}
     </div>
   )
 }
 
-const styles = (props: WrapperProps & ThemeProps) => ({
+const styles = {
   wrapper: css`
     display: flex;
   `,
-})
+}

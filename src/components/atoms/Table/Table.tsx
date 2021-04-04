@@ -33,7 +33,7 @@ export const Table = <T extends {}>(props: TableProps<T>) => {
           })}
         </tr>
       </thead>
-      <tbody css={classes.tbody}>
+      <tbody>
         {tableData.map((data: any) => {
           return (
             <tr onClick={() => getUser(data._id)}>
@@ -81,11 +81,6 @@ const styles = (props: ThemeProps) => ({
       tbody {
         border-top: 2px solid #62e000;
       }
-      /* width: 90%; */
     }
   `,
-  tbody: css`
-    overflow-y:scroll;
-    border: 2px solid black;
-  `
 })

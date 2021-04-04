@@ -202,10 +202,7 @@ const styles = {
   `,
   imagePane: css`
     padding: 20px;
-  `,
-  // wrapper: css`
-  //   display: flex;
-  // `
+  `
 }
 
 const PropertyCategoryOptions = [
