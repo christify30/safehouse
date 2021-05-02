@@ -36,15 +36,17 @@ export const fetchPropertyListingsEpic = (action$: ActionsObservable<any>) =>
 export const createPropertyListingEpic = (action$: ActionsObservable<any>) =>
   action$.pipe(
     ofType<CreatePropertyListingAction>(CREATE_PROPERTY_LISTING),
-    mergeMap(action =>
-      from(api.post({ url: '/property-listings', data: action.payload })).pipe(
+    mergeMap ( action =>{
+      console.log(action.payload);
+      
+      return from(api.post({ url: '/property-listings', data: action.payload })).pipe(
         map((response: any) => {
           history.push('/property-listings')
           return createPropertyListingSuccess(response)
-        }),
+        } ),
         catchError(error => of(setPropertyListingError(error.message)))
       )
-    )
+    })
   )
 
 export const updatePropertyListingEpic = (action$: ActionsObservable<any>) =>

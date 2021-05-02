@@ -1,14 +1,15 @@
 /** @jsx jsx */
-import React, { useState } from 'react'
+import React, { useState, useRef, LegacyRef } from 'react'
 import { jsx, css } from '@emotion/core'
 import { Formik } from 'formik'
 import * as Yup from 'yup'
 import { TextInput, Button, Select, ImageUpload } from 'components'
+import { isEmpty } from 'lodash'
 
 export const GeneralInformation = (props: any) => {
   let items: object[] = []
   const [val, setVal] = useState('')
-
+  const [files, setFIles] = useState({image: "", name:""});
   const { createPosition, loading, error } = props
 
   const handleEnter = (e: any) => {
@@ -17,6 +18,11 @@ export const GeneralInformation = (props: any) => {
       setVal(e.target.value)
       items.push({ key: 1, text: val })
     }
+  }
+
+  const handleImageUpload = (e: any) => {
+    console.log(e.target.files[0], e.target.value);
+    setFIles({image:e.target.files[0], name: e.target.value})
   }
 
   return (
@@ -42,7 +48,7 @@ export const GeneralInformation = (props: any) => {
           name: Yup.string().required('Name is Required'),
           location: Yup.string().required('Location is Required'),
           price: Yup.number().required('Price is Required'),
-          images: Yup.array().required('Please add images'),
+          images: Yup.mixed().required('Please add images'),
           rating: Yup.number(),
           description: Yup.string().required('Description is Required'),
           category: Yup.string().required('Category is Required'),
@@ -90,12 +96,14 @@ export const GeneralInformation = (props: any) => {
                 value={values.currency}
                 disabled
               />
+              {!isEmpty(files.name) && <img css = {styles.image} src = {window.URL.createObjectURL(files.image)}/>}
               <TextInput
                 name="images"
                 type="file"
                 placeholder="image"
                 error={errors.images || ''}
-                value={values.images}
+                value= {files.name}
+                onChange = {(e)=>{handleImageUpload(e); handleChange(e)}}
               />
 
               {/* <ImageUpload /> */}
@@ -183,6 +191,10 @@ const styles = {
     display: flex;
     flex-direction: row;
     padding: 30px;
+  `,
+  image: css`
+   width: 100px;
+   height: 100px
   `,
   form: css`
     width: 50%;
