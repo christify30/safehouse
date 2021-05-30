@@ -9,7 +9,7 @@ import { isEmpty } from 'lodash'
 export const GeneralInformation = (props: any) => {
   let items: object[] = []
   const [val, setVal] = useState('')
-  const [files, setFIles] = useState({image: "", name:""});
+  const [files, setFIles] = useState({ image: "", name: "" });
   const { createPosition, loading, error } = props
 
   const handleEnter = (e: any) => {
@@ -21,8 +21,8 @@ export const GeneralInformation = (props: any) => {
   }
 
   const handleImageUpload = (e: any) => {
-    console.log(e.target.files[0], e.target.value);
-    setFIles({image:e.target.files[0], name: e.target.value})
+    // console.log(e.target.files[0], e.target.value);
+    setFIles({ image: e.target.files[e.target.files.length - 1], name: e.target.value })
   }
 
   return (
@@ -37,12 +37,21 @@ export const GeneralInformation = (props: any) => {
           description: '',
           basicFeatures: '',
           additionalFeatures: '',
-          images: '',
+          images: null,
           public: false,
           currency: 'NGN',
         }}
-        onSubmit={values => {
-          createPosition(values)
+        onSubmit={(values: any) => {
+           console.log(values);
+          // const data = new FormData();
+          // data.append('images', values.files
+          // const imagesToBeUploaded = Array.from(values.images);
+          createPosition({
+            ...values,
+            basicFeatures: values.basicFeatures.split(','),
+            additionalFeatures: values.additionalFeatures.split(','),
+            images: Array.from(values.images)
+          })
         }}
         validationSchema={Yup.object().shape({
           name: Yup.string().required('Name is Required'),
@@ -96,17 +105,28 @@ export const GeneralInformation = (props: any) => {
                 value={values.currency}
                 disabled
               />
-              {!isEmpty(files.name) && <img css = {styles.image} src = {window.URL.createObjectURL(files.image)}/>}
+              {!isEmpty(files.name) && <img css={styles.image} src={window.URL.createObjectURL(files.image)} />}
               <TextInput
                 name="images"
+                multiple
+                accept = 'image/*'
                 type="file"
                 placeholder="image"
                 error={errors.images || ''}
-                value= {files.name}
-                onChange = {(e)=>{handleImageUpload(e); handleChange(e)}}
+                value={files.name}
+                onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+                  setFieldValue("images", e.currentTarget.files);
+                  handleImageUpload(e);
+                }}
               />
-
-              {/* <ImageUpload /> */}
+              <TextInput
+                name="description"
+                type="text"
+                placeholder="description"
+                error={errors.description || ''}
+                value={values.description}
+                onChange={handleChange}
+              />
 
               <TextInput
                 name="price"
@@ -135,15 +155,23 @@ export const GeneralInformation = (props: any) => {
                 setFieldValue={setFieldValue}
                 error={''}
               />
-              <Select
+              {/* <Select
                 name="basicFeatures"
                 list={BasicFeaturesOptions}
                 placeholder="Basic Features"
                 value={values.basicFeatures}
-                setFieldValue={setFieldValue}
+                setFieldValue={(v: any) => setFieldValue("basicFeatures", [v])}
                 error={''}
+              /> */}
+              <TextInput
+                name="basicFeatures"
+                type="text"
+                placeholder="Enter basic features Seperated with commas"
+                error={errors.basicFeatures || ''}
+                value={values.basicFeatures}
+                onChange={handleChange}
+                onKeyDown={handleEnter}
               />
-
               {/* <div>
                 {items.map(item => (
                   <span>{item.key}</span>
@@ -153,7 +181,7 @@ export const GeneralInformation = (props: any) => {
               <TextInput
                 name="additionalFeatures"
                 type="text"
-                placeholder="AdditionalFeatures"
+                placeholder="Enter Additional Features Seperated with commas"
                 error={errors.additionalFeatures || ''}
                 value={values.additionalFeatures}
                 onChange={handleChange}

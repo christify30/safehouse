@@ -9,6 +9,8 @@ interface TextInputProps {
   type: string
   min?: string
   max?: string
+  multiple?:boolean
+  accept?: string 
   placeholder: string
   error?: string
   value: string
@@ -24,6 +26,8 @@ export const TextInput = (props: TextInputProps) => {
     placeholder,
     min,
     max,
+    multiple,
+    accept,
     error,
     value,
     onChange,
@@ -41,6 +45,8 @@ export const TextInput = (props: TextInputProps) => {
         name={name}
         min={min}
         max={max}
+        multiple = {multiple}
+        accept = {accept}
         onChange={onChange}
         value={value}
         disabled={disabled}
