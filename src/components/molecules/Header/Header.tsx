@@ -11,10 +11,11 @@ interface HeaderProps {
   buttonUrl?: string
   buttonIcon?: string
   buttonText?: string
+  disabled?: string
 }
 
 export const Header = (props: HeaderProps) => {
-  const { title, buttonUrl, buttonType, buttonIcon, buttonText } = props
+  const { title, buttonUrl, buttonType, buttonIcon, buttonText, disabled } = props
   
   return (
     <section css={styles.container}>

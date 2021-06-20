@@ -91,7 +91,6 @@ const styles = (props: ThemeProps) => ({
       tbody {
         border-top: 2px solid #62e000;
       }
-      /* width: 90%; */
     }
   `,
 })

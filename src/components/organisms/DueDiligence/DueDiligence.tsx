@@ -17,10 +17,7 @@ const DueDiligence = (props: any) => {
   return (
     <section css={classes.container}>
       <Header
-        title="Due Diligence"
-        buttonUrl="/due-diligence/new"
-        buttonType="primary"
-        buttonText="New Due Diligence record"
+        title="Due Diligence Records"
       />
       <section css={classes.listContainer}>
         {loading ? (
@@ -71,6 +68,7 @@ const styles = (props: ThemeProps) => ({
     height: 100vh;
     overflow: hidden;
     width: 100%;
+    margin-top: 50px;
   `,
   listContainer: css`
     display: flex;
