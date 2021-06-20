@@ -25,34 +25,40 @@ export const Table = <T extends {}>(props: TableProps<T>) => {
   }
 
   return (
-    <table css={classes.container}>
-      <thead>
-        <tr>
-          {tableHeader.map(({ title }) => {
-            return <th key={title}>{title}</th>
+    <section css={classes.wrapper}>
+      <table css={classes.container}>
+        <thead>
+          <tr>
+            {tableHeader.map(({ title }) => {
+              return <th key={title}>{title}</th>
+            })}
+          </tr>
+        </thead>
+        <tbody>
+          {tableData.map((data: any) => {
+            return (
+              <tr onClick={() => getUser(data._id)}>
+                {tableHeader.map(({ key }) =>
+                  key === 'createdAt' ? (
+                    <td key={data.key}>{data[key].split('T')[0]}</td>
+                  ) : (
+                    <td key={data.key}>{data[key]}</td>
+                  )
+                )}
+              </tr>
+            )
           })}
-        </tr>
-      </thead>
-      <tbody>
-        {tableData.map((data: any) => {
-          return (
-            <tr onClick={() => getUser(data._id)}>
-              {tableHeader.map(({ key }) =>
-                key === 'createdAt' ? (
-                  <td key={data.key}>{data[key].split('T')[0]}</td>
-                ) : (
-                  <td key={data.key}>{data[key]}</td>
-                )
-              )}
-            </tr>
-          )
-        })}
-      </tbody>
-    </table>
+        </tbody>
+      </table>
+    </section>
   )
 }
 
 const styles = (props: ThemeProps) => ({
+  wrapper: css`
+    height: 100vh;
+    overflow-y: auto;
+  `,
   container: css`
     font-family: ${theme.getFont('primary')(props)};
     width: 100%;
@@ -68,7 +74,11 @@ const styles = (props: ThemeProps) => ({
       border-bottom: 1px solid #e6e6e6;
     }
     th {
-      font-weight: 500;
+      font-weight: 600;
+      color: #fff;
+      background: #92dd5f;
+      position: sticky;
+      top: 0;
       border-top: 2px solid #62e000;
     }
     tr {

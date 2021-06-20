@@ -65,6 +65,8 @@ const tableHeader = [
 
 const styles = (props: ThemeProps) => ({
   container: css`
+    height: 100vh;
+    overflow: hidden;
     width: 100%;
     margin-top: 50px;
   `,
