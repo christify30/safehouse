@@ -247,7 +247,7 @@ const styles = {
   `,
   imagePane: css`
     padding: 20px;
-  `,
+  `
 }
 
 const PropertyCategoryOptions = [

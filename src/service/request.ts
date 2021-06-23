@@ -38,7 +38,9 @@ export const makeRequest = (
         if (response.ok) {
           return resolve(response.json())
         } else {
-          return reject(response.json())
+          response.text().then(text => {
+            return reject(JSON.parse(text))
+          })
         }
       })
       .catch(error => {
