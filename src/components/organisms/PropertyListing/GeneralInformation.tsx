@@ -6,6 +6,20 @@ import * as Yup from 'yup'
 import { TextInput, Button, Select, ImageUpload } from 'components'
 import { isEmpty } from 'lodash'
 
+interface uploadValues {
+  name: string,
+  location: string,
+  price: number,
+  rating: number,
+  category: string,
+  description: string,
+  basicFeatures: string,
+  additionalFeatures: string,
+  images: [],
+  public: boolean,
+  currency: string
+}
+
 export const GeneralInformation = (props: any) => {
   let items: object[] = []
   const [val, setVal] = useState('')
@@ -41,7 +55,7 @@ export const GeneralInformation = (props: any) => {
           public: false,
           currency: 'NGN',
         }}
-        onSubmit={(values: any) => {
+        onSubmit={(values:any) => {
            console.log(values);
           // const data = new FormData();
           // data.append('images', values.files
