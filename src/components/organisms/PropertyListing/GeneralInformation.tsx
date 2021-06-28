@@ -3,8 +3,7 @@ import React, { useState, useRef, LegacyRef } from 'react'
 import { jsx, css } from '@emotion/core'
 import { Formik } from 'formik'
 import * as Yup from 'yup'
-import { TextInput, Button, Select, ImageUpload } from 'components'
-import { isEmpty } from 'lodash'
+import { TextInput, Button, Select, ImageUpload, Wrapper } from 'components'
 
 export const GeneralInformation = (props: any) => {
   let items: object[] = []
@@ -87,62 +86,69 @@ export const GeneralInformation = (props: any) => {
                 value={values.location}
                 onChange={handleChange}
               />
-
-              <TextInput
-                name="currency"
-                type="text"
-                placeholder="Currency"
-                error={errors.currency || ''}
-                value={values.currency}
-                disabled
-              />
-              {!isEmpty(files.name) && <img css = {styles.image} src = {window.URL.createObjectURL(files.image)}/>}
-              <TextInput
-                name="images"
-                type="file"
-                placeholder="image"
-                error={errors.images || ''}
-                value= {files.name}
-                onChange = {(e)=>{handleImageUpload(e); handleChange(e)}}
-              />
+              
+              <Wrapper>
+                <TextInput
+                  name="currency"
+                  type="text"
+                  placeholder="Currency"
+                  error={errors.currency || ''}
+                  value={values.currency}
+                  disabled
+                />
+                <TextInput
+                  name="images"
+                  type="file"
+                  placeholder="image"
+                  error={errors.images || ''}
+                  value={values.images}
+                />
+              </Wrapper>
 
               {/* <ImageUpload /> */}
 
-              <TextInput
-                name="price"
-                type="text"
-                placeholder="Price"
-                error={errors.price || ''}
-                value={values.price}
-                onChange={handleChange}
-              />
-              <TextInput
-                name="rating"
-                type="number"
-                placeholder="rating"
-                min="1"
-                max="5"
-                error={errors.rating || ''}
-                value={values.rating}
-                onChange={handleChange}
-              />
-
-              <Select
-                name="category"
-                list={PropertyCategoryOptions}
-                placeholder="Category"
-                value={values.category}
-                setFieldValue={setFieldValue}
-                error={''}
-              />
-              <Select
-                name="basicFeatures"
-                list={BasicFeaturesOptions}
-                placeholder="Basic Features"
-                value={values.basicFeatures}
-                setFieldValue={setFieldValue}
-                error={''}
-              />
+              <Wrapper>
+                <TextInput
+                  name="price"
+                  type="text"
+                  placeholder="Price"
+                  error={errors.price || ''}
+                  value={values.price}
+                  onChange={handleChange}
+                  css={css`
+                    margin-right: 10px;
+                  `}
+                />
+                <TextInput
+                  name="rating"
+                  type="number"
+                  placeholder="rating"
+                  min="1"
+                  max="5"
+                  error={errors.rating || ''}
+                  value={values.rating}
+                  onChange={handleChange}
+                />
+              </Wrapper>
+              
+              <Wrapper>
+                <Select
+                  name="category"
+                  list={PropertyCategoryOptions}
+                  placeholder="Category"
+                  value={values.category}
+                  setFieldValue={setFieldValue}
+                  error={''}
+                />
+                <Select
+                  name="basicFeatures"
+                  list={BasicFeaturesOptions}
+                  placeholder="Basic Features"
+                  value={values.basicFeatures}
+                  setFieldValue={setFieldValue}
+                  error={''}
+                />
+              </Wrapper>
 
               {/* <div>
                 {items.map(item => (
@@ -205,7 +211,7 @@ const styles = {
   `,
   imagePane: css`
     padding: 20px;
-  `,
+  `
 }
 
 const PropertyCategoryOptions = [
