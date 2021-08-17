@@ -1,7 +1,7 @@
 import { getToken } from '../utils/session'
 import config from '../config'
-const { apiBaseUrl } = config
-
+//const { apiBaseUrl } = config
+const apiBaseUrl: string = "https://api.uat.buysafehouse.com/api"
 export interface Options {
   url: string
   data?: object
@@ -15,7 +15,7 @@ export const makeRequest = (
   options: Options,
   withToken: boolean,
   method: string
-): Promise<any> => {
+): Promise<any> => {  
   const _options = options || {}
   const headers: Headers = {
     'Content-type': 'application/json',

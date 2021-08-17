@@ -60,6 +60,8 @@ export const GeneralInformation = (props: any) => {
           // const data = new FormData();
           // data.append('images', values.files
           // const imagesToBeUploaded = Array.from(values.images);
+          console.log(Array.from(values.images), " the images to be sent");
+          
           createPosition({
             ...values,
             basicFeatures: values.basicFeatures.split(','),
