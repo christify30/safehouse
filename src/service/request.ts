@@ -1,7 +1,7 @@
 import { getToken } from '../utils/session'
 import config from '../config'
-//const { apiBaseUrl } = config
-const apiBaseUrl: string = "https://api.uat.buysafehouse.com/api"
+const { apiBaseUrl } = config
+//const apiBaseUrl: string = "https://api.uat.buysafehouse.com/api"
 export interface Options {
   url: string
   data?: object
